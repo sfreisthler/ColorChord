@@ -6,7 +6,7 @@ if [ -d "venv" ]; then
 else
     # Create a virtual environment
     echo "Creating a virtual environment..."
-    python -m venv venv
+    python3 -m venv venv
 
     # Check if venv was created successfully
     if [ $? -ne 0 ]; then
