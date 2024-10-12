@@ -1,0 +1,1 @@
+#Here we will gather the frequency composition of our images 
