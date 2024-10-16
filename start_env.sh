@@ -21,9 +21,6 @@ echo "Activating the virtual environment..."
 # For macOS/Linux
 source venv/bin/activate
 
-# Uncomment the line below for Windows (if running from Git Bash or similar)
-# source venv/Scripts/activate
-
 # Install project dependencies from requirements.txt (if it exists)
 if [ -f "requirements.txt" ]; then
     echo "Installing dependencies from requirements.txt..."
