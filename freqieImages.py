@@ -1,34 +1,25 @@
-#Here we will gather the frequency composition of our images
+import os
+from PIL import Image
 
-import cv2
-import matplotlib.pyplot as plt
+# source image
+image_path = "static/cat.png"
+img = Image.open(image_path)
 
-# Step 1: Read the image
-image = cv2.imread('cat.png')
+# define number of slices
+num_slices = 10
+img_width, img_height = img.size
 
-# Convert BGR to RGB (OpenCV reads the image in BGR format)
-image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-# Step 2: Split the image into its Red, Green, and Blue channels
-r, g, b = cv2.split(image_rgb)
+slice_width = img_width // num_slices
 
-# Step 3: Calculate histograms for each channel
-# bins parameter defines the number of bins
-hist_r = cv2.calcHist([r], [0], None, [256], [0, 256])
-hist_g = cv2.calcHist([g], [0], None, [256], [0, 256])
-hist_b = cv2.calcHist([b], [0], None, [256], [0, 256])
+slices = []
 
-# Step 4: Plot the histograms
-plt.figure()
-plt.title("RGB Histogram")
-plt.xlabel("Pixel Value")
-plt.ylabel("Frequency")
 
-plt.plot(hist_r, color='r', label='Red')
-plt.plot(hist_g, color='g', label='Green')
-plt.plot(hist_b, color='b', label='Blue')
-plt.legend()
+# generate slices
+for i in range(num_slices):
+	left = i * slice_width
+	right = left + slice_width if i < num_slices - 1 else img_width
+	slice_img = img.crop((left, 0, right, img_height))
+	slice_img.save(os.path.join("static", f"slice_{i}.png"))
+	slices.append(slice_img)
 
-# Show the plot
-plt.xlim([0, 256])  # Pixel values range from 0 to 255
-plt.show()
