@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/ColorChord/static/js/main.472aabec.js",
+    "index.html": "/ColorChord/index.html",
+    "main.472aabec.js.map": "/ColorChord/static/js/main.472aabec.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.472aabec.js"
+  ]
+}
