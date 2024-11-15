@@ -17,3 +17,12 @@
 2. 2D FFT image slage
 3. For each sound sample, compute correlation score
 4. Pick sample with highest correlation
+
+### To Dos (in order of attack)
+- [ ] Setup user input website
+- [ ] Assemble (mini) sample library
+- [ ] Compute correlation for mini sample library for each slice in image
+- [ ] Assemble samples and output sound
+- [ ] Add more sample sounds
+- [ ] Add color component
+- [ ] Make website cute
