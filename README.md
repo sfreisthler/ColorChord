@@ -11,3 +11,6 @@
 3. For each slice process slice (core algorithm)
 4. Concatenate sounds
 5. Play sound
+
+### Core Algorithm
+1. 
