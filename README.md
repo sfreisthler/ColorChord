@@ -13,4 +13,7 @@
 5. Play sound
 
 ### Core Algorithm
-1. 
+1. Determine primary color in slice -> determines which sample library to pull from
+2. 2D FFT image slage
+3. For each sound sample, compute correlation score
+4. Pick sample with highest correlation
