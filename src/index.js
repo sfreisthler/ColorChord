@@ -5,10 +5,32 @@ import DragAndDropImage from "./DropImage";
 import ProcessedPage from "./ProcessedPage";
 
 function App() {
-  const handleImageUpload = (file) => {
+  const deployedBackend = "https://colorchord.onrender.com/upload"
+  const localBackend = "http://127.0.0.1:5000/upload"
+
+  const handleImageUpload = async (file) => {
     console.log("Image uploaded:", file);
-    // Add your image processing logic here
-  };
+    //image processing
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const response = await fetch(deployedBackend, {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        console.log("Server Response:", data);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    
+    };
 
   return (
     <div>
