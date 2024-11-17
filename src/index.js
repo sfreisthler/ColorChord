@@ -18,7 +18,6 @@ function App() {
   );
 }
 
-// Correctly set the basename for the subpath
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter basename="/ColorChord">
