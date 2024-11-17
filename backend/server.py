@@ -14,8 +14,8 @@ def upload_image():
         return jsonify({'error': 'No file uploaded'}), 400
 
     file = request.files['file']
-    file_path = os.path.join(UPLOAD_FOLDER, file.filename)
-    file.save(file_path)
+
+    ####### PROCESS IMAGE HERE #############################
 
     return jsonify({'message': f"Processed {file.filename}"})
 

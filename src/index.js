@@ -10,11 +10,13 @@ function App() {
 
   const handleImageUpload = async (file) => {
     console.log("Image uploaded:", file);
-    //image processing
+
     const formData = new FormData();
     formData.append("file", file);
 
     try {
+        //WHEN TESTING SERVER.PY LOCALLY UPDATE TO localBackend
+        //Make sure you use deployedBackend when you pushif you are going to host backend on render
         const response = await fetch(deployedBackend, {
           method: "POST",
           body: formData,

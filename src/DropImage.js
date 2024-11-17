@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const DragAndDropImage = ({ onImageUpload }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false); // Track if submit button should be enabled
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -35,8 +35,8 @@ const DragAndDropImage = ({ onImageUpload }) => {
       const reader = new FileReader();
       reader.onload = () => {
         setImagePreview(reader.result);
-        onImageUpload(file); // Pass the file to parent logic
-        setIsSubmitEnabled(true); // Enable the submit button
+        onImageUpload(file); 
+        setIsSubmitEnabled(true);
       };
       reader.readAsDataURL(file);
     } else {
@@ -49,7 +49,7 @@ const DragAndDropImage = ({ onImageUpload }) => {
   };
 
   const handleSubmit = () => {
-    navigate("/processed"); // Redirect to the processed page
+    navigate("/processed"); 
   };
 
   return (
@@ -87,7 +87,7 @@ const DragAndDropImage = ({ onImageUpload }) => {
       </div>
       <button
         onClick={handleSubmit}
-        disabled={!isSubmitEnabled} // Disable the button if no image is uploaded
+        disabled={!isSubmitEnabled} 
         style={{
           marginTop: "20px",
           padding: "10px 20px",
