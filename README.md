@@ -19,7 +19,7 @@
 4. Pick sample with highest correlation
 
 ### To Dos (in order of attack)
-- [ ] Setup user input website
+- [x] Setup user input website
 - [ ] Assemble (mini) sample library
 - [ ] Compute correlation for mini sample library for each slice in image
 - [ ] Assemble samples and output sound
