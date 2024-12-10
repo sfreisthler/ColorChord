@@ -6,7 +6,7 @@ import ProcessedPage from "./ProcessedPage";
 
 function App() {
   const deployedBackend = "https://colorchord.onrender.com/upload"
-  const localBackend = "http://127.0.0.1:5000/upload"
+  const localBackend = "http://127.0.0.1:50000/upload"
 
   const handleImageUpload = async (file) => {
     console.log("Image uploaded:", file);

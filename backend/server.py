@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import os
 
@@ -19,7 +19,12 @@ def upload_image():
 
     return jsonify({'message': f"Processed {file.filename}"})
 
+
+@app.route('/sound', methods=['GET'])
+def send_sound():
+    return send_file('../static/beer_soda_crack_open_can_fizz_2.wav', mimetype='audio/wav')
+
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000)) 
+    port = int(os.environ.get('PORT', 50000)) 
     app.run(host='0.0.0.0', port=port)
 
