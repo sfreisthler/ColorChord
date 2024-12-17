@@ -6,3 +6,4 @@ node_modules/
 .DS_Store
 samples.json
 output.mp3
+uploads/
