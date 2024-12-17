@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import os
 import json
 import librosa
+from pydub import AudioSegment
+from scipy.spatial.distance import euclidean
 
 def precompute_audio_ffts(sample_folder, output_file):
 	fft_library = {}
@@ -52,3 +54,37 @@ def compute_fft(slice):
 	# return 1D fft for comparison with audio fft
 	return fft_magnitude.flatten()
 
+def assemble_audio(sample_folder, sample_list, output_path):
+	output_audio = AudioSegment.empty()
+	for sample in sample_list:
+		sample_path = os.path.join(sample_folder, sample)
+		segment = AudioSegment.from_file(sample_path)
+		output_audio += segment
+
+	output_audio.export(output_path, format="mp3")
+
+
+def find_closest_sound(slice_fft, sample_library):
+	min_distance = float('inf')
+	closest_sound = None
+
+	for sample_name, sample_fft in sample_library.items():
+		min_length = min(len(slice_fft), len(sample_fft))
+		distance = euclidean(slice_fft[:min_length], sample_fft[:min_length])
+
+		if distance < min_distance:
+			closest_sound = sample_name
+			min_distance = distance
+	
+	return closest_sound
+
+def image_to_sound(image):
+	samples = load_sample_library("./samples.json")
+	slices = slice_image(image)
+	sounds = [None] * len(slices)
+
+	for i in range(len(slices)):
+		image_fft = compute_fft(slices[i])
+		sounds[i] = find_closest_sound(image_fft, samples)
+
+	assemble_audio('./samples', sounds, "./output.mp3")
