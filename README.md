@@ -1,5 +1,7 @@
 # ColorChord
 
+NOTE: will probably need to install ffmpeg on backend server
+
 ### Workflow
 1. Run `source start_env.sh`
 2. If you change dependencies, run `bash update_dependencies.sh`
