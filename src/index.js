@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DragAndDropImage from "./DropImage";
 import ProcessedPage from "./ProcessedPage";
+import TestFile from "./TestFile";
+
 
 function App() {
   const deployedBackend = "https://colorchord.onrender.com/upload"
@@ -17,7 +19,7 @@ function App() {
     try {
         //WHEN TESTING SERVER.PY LOCALLY UPDATE TO localBackend
         //Make sure you use deployedBackend when you pushif you are going to host backend on render
-        const response = await fetch(deployedBackend, {
+        const response = await fetch(localBackend, {
           method: "POST",
           body: formData,
         });
@@ -48,6 +50,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/processed" element={<ProcessedPage />} />
+      <Route path="/test" element={<TestFile />} />
     </Routes>
   </BrowserRouter>
 );

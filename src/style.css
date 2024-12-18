@@ -1,0 +1,252 @@
+/* html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #003049;
+}
+
+.desktop .overlap-group-wrapper {
+    background-color: #003049;
+    height: 1100px;
+    overflow: hidden;
+    width: 1800px;
+}
+
+
+.desktop .overlap-group {
+    background-color: #c32f27;
+    border: 100px solid;
+    border-color: #fb8b24;
+    border-radius: 656.5px / 739px;
+    box-shadow: 0px 4px 4px #00000040;
+    height: 1478px;
+    position: relative;
+    left: 78px;
+    top: 102px;
+    width: 1313px;
+}
+
+.desktop .overlap {
+    height: 287px;
+    left: 0;
+    position: absolute;
+    top: 652px;
+    width: 1313px;
+}
+
+.desktop .rectangle {
+    background-color: #c32f27;
+    border-color: #fb8b24;
+    border-left-style: solid;
+    border-left-width: 100px;
+    border-right-style: solid;
+    border-right-width: 100px;
+    height: 229px;
+    left: 0;
+    position: absolute;
+    top: 58px;
+    width: 1313px;
+}
+
+.desktop .div {
+    background-color: #fcbf49;
+    border: 10px solid;
+    border-color: #eae2b7;
+    border-radius: 15px;
+    height: 66px;
+    left: 508px;
+    position: absolute;
+    top: 0;
+    width: 266px;
+}
+
+.desktop .text-wrapper {
+    color: #f77f00;
+    font-family: "Limelight-Regular", Helvetica;
+    font-size: 28px;
+    font-weight: 400;
+    left: 309px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 15px;
+    width: 665px;
+}
+
+.desktop .overlap-2 {
+    height: 164px;
+    left: 299px;
+    position: absolute;
+    top: 456px;
+    width: 685px;
+}
+
+.desktop .rectangle-2 {
+    background-color: #fcbf49;
+    border: 10px solid;
+    border-color: #eae2b7;
+    border-radius: 30px;
+    height: 162px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 685px;
+}
+
+.desktop .text-wrapper-2 {
+    color: #f77f00;
+    font-family: "Limelight-Regular", Helvetica;
+    font-size: 96px;
+    font-weight: 400;
+    left: 10px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 22px;
+    width: 665px;
+
+    
+}
+
+
+
+
+
+/* CSS */
+
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap');
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #003049;
+}
+
+
+.desktop .overlap-group-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 150px;
+  }
+  
+
+  .desktop .overlap-group {
+    background-color: #c32f27;
+    border: 100px solid;
+    border-color: #fb8b24;
+    box-shadow: 0px 4px 4px #00000040;
+    border-radius: 656.5px  739px 0 0; /* Top corners curved, bottom corners sharp */
+    border-width: 100px 100px 0 100px; /* Remove the bottom border by setting its width to 0 */
+
+
+
+    height: 800px;
+    width: 900px;
+
+    display: flex; /* Enable Flexbox */
+    align-items: center; /* Centers vertically */
+    position: relative; /* Ensure relative positioning for contained elements */
+    flex-direction: column; /* Stack children vertically */
+    gap: 100px; /* Adds spacing between stacked items */
+    padding-top: 200px; /* Adds 50px padding to the top */
+
+}
+
+
+.desktop .div {
+    background-color: #fcbf49;
+    border: 10px solid;
+    border-color: #eae2b7;
+    border-radius: 15px;
+    height: 100px;
+    width: 500px;
+
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
+    position: relative;
+}
+
+.desktop .text-wrapper {
+    color: #f77f00;
+    font-family: "Climate Crisis", sans-serif;
+    font-size: 55px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1; /* Ensures spacing around the text is minimal */
+    margin-top: -90px; /* Fine-tune vertical alignment */
+    text-align: center;
+    position: relative; /* Ensure it doesn't escape the `.div` container */
+    width: auto;
+}
+
+.desktop .rectangle-2 {
+    background-color: #fcbf49;
+    border: 5px solid;
+    border-color: #eae2b7;
+    border-radius: 8px;
+    height: 30px;
+    width: 200px;
+
+    display: flex; /* Enable Flexbox */
+    position: relative;
+}
+
+.desktop .text-wrapper-2 {
+    color: #f77f00;
+    font-family: "Climate Crisis", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1; /* Ensures spacing around the text is minimal */
+    margin-top: -30px; /* Fine-tune vertical alignment */
+    text-align: center;
+    position: relative; /* Ensure it doesn't escape the `.div` container */
+    width: auto;
+}
+
+
+
+
+
+  /* html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #003049;
+}
+
+.desktop .overlap-group-wrapper {
+    background-color: #003049;
+    height: 1100px;
+    overflow: hidden;
+    width: 1800px;
+}
+
+
+.desktop .overlap-group {
+    background-color: #c32f27;
+    border: 100px solid;
+    border-color: #fb8b24;
+    border-radius: 656.5px / 739px;
+    box-shadow: 0px 4px 4px #00000040;
+    height: 1478px;
+    position: relative;
+    left: 78px;
+    top: 102px;
+    width: 1313px;
+}
+
+
+
+*/
+  

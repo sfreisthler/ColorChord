@@ -6,7 +6,7 @@ const ProcessedPage = () => {
 
     const playSound = async () => {
         try {
-            const response = await fetch(deployedBackend);
+            const response = await fetch(localBackend);
             if (!response.ok) {
               throw new Error("Failed to fetch sound");
             }
