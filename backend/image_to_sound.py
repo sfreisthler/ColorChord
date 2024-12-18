@@ -95,7 +95,7 @@ def find_closest_sound(slice_fft, sample_library):
 	for sample_name, sample_fft in sample_library.items():
 
 		sample_fft = normalize_fft(resample_fft(sample_fft))
-		distance = cosine_similarity(slice_fft, sample_fft)
+		distance = compute_similarity(slice_fft, sample_fft, "cos")
 
 		if distance < min_distance:
 			closest_sound = sample_name
@@ -103,8 +103,23 @@ def find_closest_sound(slice_fft, sample_library):
 	
 	return closest_sound
 
+
+def compute_similarity(image_fft, sound_fft, type="cos"):
+	
+	if type == "cos":
+		return cosine_similarity(image_fft, sound_fft)
+	elif type == "euclidean":
+		return euclidian_similarity(image_fft, sound_fft)
+	else:
+		return  cosine_similarity(image_fft, sound_fft)
+
+
 def cosine_similarity(image_fft, sound_fft):
 	similarity = 1 - cosine(image_fft, sound_fft)
+	return similarity
+
+def euclidian_similarity(image_fft, sound_fft):
+	similarity = euclidean(image_fft, sound_fft)
 	return similarity
 
 
