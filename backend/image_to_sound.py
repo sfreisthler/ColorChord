@@ -1,10 +1,9 @@
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 import json
 import librosa
-from pydub import AudioSegment
+import wave
 from scipy.spatial.distance import euclidean
 
 def precompute_audio_ffts(sample_folder, output_file):
@@ -42,11 +41,6 @@ def slice_image(image_path, num_slices = 10):
 		
 	return slices
 
-def display_image(image):
-	plt.imshow(image, cmap='gray')
-	plt.axis('off')
-	plt.show()
-
 def compute_fft(slice):
 	fft = np.fft.fft2(slice)
 	fft_magnitude = np.abs(np.fft.fftshift(fft))
@@ -54,14 +48,30 @@ def compute_fft(slice):
 	# return 1D fft for comparison with audio fft
 	return fft_magnitude.flatten()
 
-def assemble_audio(sample_folder, sample_list, output_path):
-	output_audio = AudioSegment.empty()
-	for sample in sample_list:
-		sample_path = os.path.join(sample_folder, sample)
-		segment = AudioSegment.from_file(sample_path)
-		output_audio += segment
+#def assemble_audio(sample_folder, sample_list, output_path):
+#	output_audio = AudioSegment.empty()
+#	for sample in sample_list:
+#		sample_path = os.path.join(sample_folder, sample)
+##		output_audio += segment
+#
+#	output_audio.export(output_path, format="mp3")
 
-	output_audio.export(output_path, format="mp3")
+def assemble_audio(sample_folder, sample_list, output_path):
+    # Open the output wave file
+    with wave.open(output_path, 'wb') as output_wave:
+        for i, sample in enumerate(sample_list):
+            sample_path = os.path.join(sample_folder, sample)
+            
+            # Read each sample
+            with wave.open(sample_path, 'rb') as sample_wave:
+                # Set output params using the first sample
+                if i == 0:
+                    output_wave.setparams(sample_wave.getparams())
+                
+                # Read and write audio frames
+                frames = sample_wave.readframes(sample_wave.getnframes())
+                output_wave.writeframes(frames)
+
 
 
 def find_closest_sound(slice_fft, sample_library):
