@@ -4,7 +4,8 @@ import os
 import json
 import librosa
 import wave
-from scipy.spatial.distance import euclidean
+from scipy.spatial.distance import euclidean, cosine
+from scipy.interpolate import interp1d
 
 def precompute_audio_ffts(sample_folder, output_file):
 	fft_library = {}
@@ -13,6 +14,7 @@ def precompute_audio_ffts(sample_folder, output_file):
 			file_path = os.path.join(sample_folder, filename)
 			y, sr = librosa.load(file_path, sr=8000, mono=True)
 			fft_result = np.abs(np.fft.fft(y))
+			fft_result = normalize_fft(fft_result)
 			fft_library[filename] = fft_result.tolist()
 			print(f"{filename} processed")
 
@@ -48,13 +50,9 @@ def compute_fft(slice):
 	# return 1D fft for comparison with audio fft
 	return fft_magnitude.flatten()
 
-#def assemble_audio(sample_folder, sample_list, output_path):
-#	output_audio = AudioSegment.empty()
-#	for sample in sample_list:
-#		sample_path = os.path.join(sample_folder, sample)
-##		output_audio += segment
-#
-#	output_audio.export(output_path, format="mp3")
+def normalize_fft(fft):
+	magnitude = np.abs(fft)
+	return magnitude / np.max(magnitude)
 
 def assemble_audio(sample_folder, sample_list, output_path):
     # Open the output wave file
@@ -72,6 +70,22 @@ def assemble_audio(sample_folder, sample_list, output_path):
                 frames = sample_wave.readframes(sample_wave.getnframes())
                 output_wave.writeframes(frames)
 
+def resample_fft(fft_data, target_length=8000):
+    """
+    Resample FFT data to a target length.
+    
+    Parameters:
+        fft_data (numpy array): Input FFT data to be resampled.
+        target_length (int): The desired length of the output.
+        
+    Returns:
+        numpy array: Resampled FFT data.
+    """
+    x_original = np.linspace(0, 1, len(fft_data))  # Original FFT indices
+    x_resampled = np.linspace(0, 1, target_length)  # Target FFT indices
+    interpolator = interp1d(x_original, fft_data, kind='linear')
+    return interpolator(x_resampled)
+
 
 
 def find_closest_sound(slice_fft, sample_library):
@@ -79,8 +93,9 @@ def find_closest_sound(slice_fft, sample_library):
 	closest_sound = None
 
 	for sample_name, sample_fft in sample_library.items():
-		min_length = min(len(slice_fft), len(sample_fft))
-		distance = euclidean(slice_fft[:min_length], sample_fft[:min_length])
+
+		sample_fft = normalize_fft(resample_fft(sample_fft))
+		distance = cosine_similarity(slice_fft, sample_fft)
 
 		if distance < min_distance:
 			closest_sound = sample_name
@@ -88,13 +103,32 @@ def find_closest_sound(slice_fft, sample_library):
 	
 	return closest_sound
 
+def cosine_similarity(image_fft, sound_fft):
+	similarity = 1 - cosine(image_fft, sound_fft)
+	return similarity
+
+
+# returns image_fft, sound_fft padded to same length
+def pad_ffts(image_fft, sound_fft):
+	if len(image_fft) > len(sound_fft):
+
+		return image_fft, np.pad(sound_fft, (0, len(image_fft) - len(sound_fft)), mode='constant')
+	
+	elif len(image_fft) < sound_fft:
+		return np.pad(image_fft, (0, len(sound_fft) - len(image_fft)), mode='constant'), sound_fft
+
+	return image_fft, sound_fft
+
+
 def image_to_sound(image):
 	samples = load_sample_library("./samples.json")
 	slices = slice_image(image)
 	sounds = [None] * len(slices)
 
 	for i in range(len(slices)):
-		image_fft = compute_fft(slices[i])
+		image_fft = normalize_fft(resample_fft(compute_fft(slices[i])))
 		sounds[i] = find_closest_sound(image_fft, samples)
+	
+	print(sounds)
 
 	assemble_audio('./samples', sounds, "./output.mp3")
