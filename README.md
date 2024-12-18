@@ -1,11 +1,14 @@
 # ColorChord
 
-NOTE: will probably need to install ffmpeg on backend server
-
 ### Workflow
 1. Run `source start_env.sh`
 2. If you change dependencies, run `bash update_dependencies.sh`
 3. `deactivate` gets you out of the virtual environment
+
+### Local Testing 
+1. Change src/index.js and src/processed.js from deployedBackend to local backend 
+    DONT FORGET TO CHANGE THIS BACK WHEN YOU PUSH 
+2. run server.py 
 
 ### Project Overview
 1. Upload Photo
@@ -16,15 +19,12 @@ NOTE: will probably need to install ffmpeg on backend server
 
 ### Core Algorithm
 1. Determine primary color in slice -> determines which sample library to pull from
-2. 2D FFT image slice
+2. 2D FFT image slage
 3. For each sound sample, compute correlation score
 4. Pick sample with highest correlation
 
-### To Dos (in order of attack)
-- [x] Setup user input website
-- [ ] Assemble (mini) sample library
-- [ ] Compute correlation for mini sample library for each slice in image
-- [ ] Assemble samples and output sound
-- [ ] Add more sample sounds
-- [ ] Add color component
-- [ ] Make website cute
+
+### Notes 
+Dont forget to push samples.json to github when it is finished. 
+
+
