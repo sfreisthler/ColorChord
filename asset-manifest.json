@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/ColorChord/static/js/main.68937c41.js",
+    "main.css": "/ColorChord/static/css/main.7f7e909f.css",
+    "main.js": "/ColorChord/static/js/main.bef653de.js",
     "index.html": "/ColorChord/index.html",
-    "main.68937c41.js.map": "/ColorChord/static/js/main.68937c41.js.map"
+    "main.7f7e909f.css.map": "/ColorChord/static/css/main.7f7e909f.css.map",
+    "main.bef653de.js.map": "/ColorChord/static/js/main.bef653de.js.map"
   },
   "entrypoints": [
-    "static/js/main.68937c41.js"
+    "static/css/main.7f7e909f.css",
+    "static/js/main.bef653de.js"
   ]
 }
