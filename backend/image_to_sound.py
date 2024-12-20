@@ -88,18 +88,22 @@ def resample_fft(fft_data, target_length=8000):
 
 
 
-def find_closest_sound(slice_fft, sample_library):
-	min_distance = float('inf')
+def find_sound(slice_fft, sample_library, type="max"):
+	selected_similarity = -float('inf') if type == "max" else float('inf')
 	closest_sound = None
 
 	for sample_name, sample_fft in sample_library.items():
 
 		sample_fft = normalize_fft(resample_fft(sample_fft))
-		distance = compute_similarity(slice_fft, sample_fft, "cos")
+		similarity = compute_similarity(slice_fft, sample_fft, "cos")
 
-		if distance < min_distance:
+
+		if type == 'max' and similarity > selected_similarity:
 			closest_sound = sample_name
-			min_distance = distance
+			selected_similarity = similarity
+		elif type == 'min'and similarity < selected_similarity:
+			closest_sound = sample_name
+			selected_similarity = similarity
 	
 	return closest_sound
 
@@ -119,7 +123,7 @@ def cosine_similarity(image_fft, sound_fft):
 	return similarity
 
 def euclidian_similarity(image_fft, sound_fft):
-	similarity = euclidean(image_fft, sound_fft)
+	similarity = 1 / (1 + euclidean(image_fft, sound_fft))
 	return similarity
 
 
@@ -145,7 +149,7 @@ def image_to_sound(image):
 
 	for i in range(len(slices)):
 		image_fft = prepare_image_fft(slices[i])
-		sounds[i] = find_closest_sound(image_fft, samples)
+		sounds[i] = find_sound(image_fft, samples)
 	
 	print(sounds)
 
