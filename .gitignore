@@ -7,3 +7,4 @@ node_modules/
 samples.json
 output.mp3
 uploads/
+__pycache__/
