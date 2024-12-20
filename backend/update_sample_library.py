@@ -1,6 +1,5 @@
 import os
 import argparse
-import json
 from image_to_sound import precompute_audio_ffts
 
 def main():
