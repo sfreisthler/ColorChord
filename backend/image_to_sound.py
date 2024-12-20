@@ -14,6 +14,7 @@ def precompute_audio_ffts(sample_folder, output_file):
 			file_path = os.path.join(sample_folder, filename)
 			y, sr = librosa.load(file_path, sr=8000, mono=True)
 			fft_result = np.abs(np.fft.fft(y))
+			fft_result = resample_fft(fft_result)
 			fft_result = normalize_fft(fft_result)
 			fft_library[filename] = fft_result.tolist()
 			print(f"{filename} processed")
@@ -90,22 +91,21 @@ def resample_fft(fft_data, target_length=8000):
 
 def find_sound(slice_fft, sample_library, type="max"):
 	selected_similarity = -float('inf') if type == "max" else float('inf')
-	closest_sound = None
+	selected_sound = None
 
 	for sample_name, sample_fft in sample_library.items():
 
-		sample_fft = normalize_fft(resample_fft(sample_fft))
 		similarity = compute_similarity(slice_fft, sample_fft, "cos")
 
 
 		if type == 'max' and similarity > selected_similarity:
-			closest_sound = sample_name
+			selected_sound = sample_name
 			selected_similarity = similarity
 		elif type == 'min'and similarity < selected_similarity:
-			closest_sound = sample_name
+			selected_sound = sample_name
 			selected_similarity = similarity
 	
-	return closest_sound
+	return selected_sound
 
 
 def compute_similarity(image_fft, sound_fft, type="cos"):
@@ -138,8 +138,8 @@ def pad_ffts(image_fft, sound_fft):
 
 	return image_fft, sound_fft
 
-def prepare_image_fft(image_fft):
-	return normalize_fft(resample_fft(compute_fft(image_fft)))
+def prepare_fft(fft):
+	return normalize_fft(resample_fft(compute_fft(fft)))
 
 
 def image_to_sound(image):
@@ -148,7 +148,7 @@ def image_to_sound(image):
 	sounds = [None] * len(slices)
 
 	for i in range(len(slices)):
-		image_fft = prepare_image_fft(slices[i])
+		image_fft = prepare_fft(slices[i])
 		sounds[i] = find_sound(image_fft, samples)
 	
 	print(sounds)
