@@ -1,5 +1,7 @@
 # ColorChord
 
+ACCESS COLOR CHORD AT https://www.sadiefreisthler.com/ColorChord/
+
 ### Workflow
 1. Run `source start_env.sh`
 2. If you change dependencies, run `bash update_dependencies.sh`
@@ -7,8 +9,8 @@
 
 ### Local Testing 
 1. Change src/index.js and src/processed.js from deployedBackend to local backend 
-    DONT FORGET TO CHANGE THIS BACK WHEN YOU PUSH 
 2. run server.py 
+3. run npm start to start the front end 
 
 ### Project Overview
 1. Upload Photo
@@ -23,8 +25,5 @@
 3. For each sound sample, compute correlation score
 4. Pick sample with highest correlation
 
-
-### Notes 
-Dont forget to push samples.json to github when it is finished. 
 
 
