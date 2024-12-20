@@ -89,7 +89,7 @@ def resample_fft(fft_data, target_length=8000):
 
 
 
-def find_sound(slice_fft, sample_library, type="max"):
+def find_sound(slice_fft, sample_library, type="min"):
 	selected_similarity = -float('inf') if type == "max" else float('inf')
 	selected_sound = None
 
