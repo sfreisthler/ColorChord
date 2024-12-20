@@ -134,6 +134,9 @@ def pad_ffts(image_fft, sound_fft):
 
 	return image_fft, sound_fft
 
+def prepare_image_fft(image_fft):
+	return normalize_fft(resample_fft(compute_fft(image_fft)))
+
 
 def image_to_sound(image):
 	samples = load_sample_library("./samples.json")
@@ -141,7 +144,7 @@ def image_to_sound(image):
 	sounds = [None] * len(slices)
 
 	for i in range(len(slices)):
-		image_fft = normalize_fft(resample_fft(compute_fft(slices[i])))
+		image_fft = prepare_image_fft(slices[i])
 		sounds[i] = find_closest_sound(image_fft, samples)
 	
 	print(sounds)
