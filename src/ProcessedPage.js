@@ -2,7 +2,7 @@ import React from "react";
 
 const ProcessedPage = () => {
     const localBackend = "http://127.0.0.1:50000/sound";
-    const deployedBackend = "https://colorchord.onrender.com/upload";
+    const deployedBackend = "https://colorchord.onrender.com/sound";
 
     const playSound = async () => {
         try {
